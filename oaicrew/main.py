@@ -21,7 +21,7 @@ def run():
     """
     Run the crew.
     """
-    for index in range(26,31):
+    for index in range(1,31):
         api_url = f"{API_URL}{index}"
         print(f"Fetching test case {index} from {api_url}")
         start_dir = os.getcwd()     #get current working directory
@@ -128,21 +128,6 @@ def run():
                 log.write(f"\nError: {e}")
             print(f"Error in test case {index}: {e}")
             raise e
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
