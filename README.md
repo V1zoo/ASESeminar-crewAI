@@ -74,7 +74,6 @@ in this repository.
 Before running your crew, make sure you have the following keys set as environment variables in your `.env` file:
 
 - An [OpenAI API key](https://platform.openai.com/account/api-keys) (or other LLM API key): `OPENAI_API_KEY=sk-...`
-- A [Serper.dev](https://serper.dev/) API key: `SERPER_API_KEY=YOUR_KEY_HERE`
 
 Lock the dependencies and install them by using the CLI command but first, navigate to your project directory:
 
@@ -88,3 +87,34 @@ To run your crew, execute the following command in the root of the folder "oaicr
 ```bash
 crewai run
 ```
+
+### 4. Error "List index out of range msg_i" when using Ollama
+
+In case you encounter this error, please apply the following following hotfix:
+File: oaicrew/.venv/Lib/site-packages/litellm/litellm_core_utils/prompt-templates/factory.py
+Change
+
+```python
+def ollama_pt(...
+ if ollama_tool_calls:
+        assistant_content_str += (
+            f"Tool Calls: {json.dumps(ollama_tool_calls, indent=2)}"
+        )
+        msg_i += 1   #remove one indent here
+)
+```
+
+to
+
+```python
+def ollama_pt(...
+ if ollama_tool_calls:
+        assistant_content_str += (
+            f"Tool Calls: {json.dumps(ollama_tool_calls, indent=2)}"
+        )
+ msg_i += 1
+)
+```
+
+See also:
+https://community.crewai.com/t/list-index-out-of-range-msg-i/5612/8
