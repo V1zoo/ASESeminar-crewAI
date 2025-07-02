@@ -36,13 +36,38 @@ If you encounter issues during installation or usage, here are some common solut
 
 ### 2. Setting Up Your Crew with the YAML Configuration
 
-Move the folder
+```shell
+crewai create crew oaicrew
+```
+
+This command creates a new project folder with the following structure:
+
+```
+oaicrew/
+├── .gitignore
+├── pyproject.toml
+├── README.md
+├── .env
+└── src/
+    └── oaicrew/        <--      (!)   Replace this folder with the oaicrew-folder from this repository
+        ├── __init__.py
+        ├── main.py
+        ├── crew.py
+        ├── tools/
+        │   ├── custom_tool.py
+        │   └── __init__.py
+        └── config/
+            ├── agents.yaml
+            └── tasks.yaml
+```
+
+Replace the folder marked above with the folder
 
 ```bash
 oaicrew
 ```
 
-into the root directory of the virtual environment where you installed crewai and the tools.
+in this repository.
 
 ### 3. Running Your Crew
 

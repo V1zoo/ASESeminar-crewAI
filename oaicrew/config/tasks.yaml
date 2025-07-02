@@ -1,0 +1,37 @@
+plan_task:
+  description: >
+    You are working in the directory: repos/repo_{index}. This is a Git repository.
+    Outline programming steps necessary fix the problem described below.
+    The fix will be verified by running the affected tests.
+    Ensure that the fix is minimal and only changes whats necessary to resolve the problem.
+    Problem description: 
+    {prompt}
+  expected_output: >
+    An outline about a minimal fix for the following problem: 
+    {prompt}
+  agent: planner
+
+bugfix_task:
+  description: >
+    You are working in the directory: repos/repo_{index}. This is a Git repository.
+    Use the given outline and implement the fix for the problem described below.
+    All code changes must be saved to the files, so they appear in `git diff`.
+    Ensure that the changes are written to the files by using the file writing tool FileWriterTool() and passing the fixed code as an argument.
+    You are allowed to overwrite files in this directory.
+    Ensure that the fix is minimal and only changes whats necessary to resolve the problem.
+    Problem description: 
+    {prompt}
+  expected_output: >
+    A working mininal fix for the following problem: 
+    {prompt}
+  agent: coder
+
+test_task:
+  description: >
+    Proofread the given fix and check weather the following problem was solved: 
+    {prompt}
+
+    If however the problem was not solved, tell the coder-agent to re-do his task once more.
+  expected_output: >
+    Insight into the effevtiveness of the implemented fix
+  agent: tester
