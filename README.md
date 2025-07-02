@@ -90,13 +90,13 @@ crewai run
 
 ### 4. Error "List index out of range msg_i" when using Ollama
 
-In case you encounter this error, please apply the following following hotfix:
+In case you encounter this error, please apply the following hotfix:
 File: oaicrew/.venv/Lib/site-packages/litellm/litellm_core_utils/prompt-templates/factory.py
 Change
 
 ```python
-def ollama_pt(...
- if ollama_tool_calls:
+def ollama_pt(...                         #line 183
+ if ollama_tool_calls:                    #line 248
         assistant_content_str += (
             f"Tool Calls: {json.dumps(ollama_tool_calls, indent=2)}"
         )
